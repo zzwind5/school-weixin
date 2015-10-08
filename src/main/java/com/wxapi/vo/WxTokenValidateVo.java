@@ -9,8 +9,8 @@ import com.core.vo.BaseVo;
 @Setter
 public class WxTokenValidateVo extends BaseVo {
 
-	private String signature;	// 微信加密签名
-	private String timestamp;	// 时间戳
-	private String nonce;		// 随机数
-	private String echostr;		// 随机字符串
+	private String signature;
+	private String timestamp;
+	private String nonce;
+	private String echostr;
 }
