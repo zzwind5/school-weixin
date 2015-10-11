@@ -1,9 +1,9 @@
-package com.wxapi.vo;
+package com.data.vo.wxapi;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import com.core.vo.BaseVo;
+import com.data.vo.BaseVo;
 
 @Getter
 @Setter

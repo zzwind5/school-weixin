@@ -1,4 +1,4 @@
-package com.wxapi.data.core;
+package com.data.model;
 
 import java.io.Serializable;
 
@@ -6,16 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
-public abstract class BaseWxDo<PK extends Serializable> extends WxTimeStamp {
+@EqualsAndHashCode(callSuper = false, of = {})
+public abstract class BaseWxDo<PK extends Serializable> extends WxTimeStamp implements WxDo {
 
 	private static final long serialVersionUID = -9892832637945768L;
 
 	@Id
 	@Getter @Setter
 	@GeneratedValue
-	private PK id;
+	protected PK id;
 }

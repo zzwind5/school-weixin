@@ -1,4 +1,4 @@
-package com.wxapi.data.core;
+package com.data.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

@@ -1,4 +1,4 @@
-package com.core.vo;
+package com.data.vo;
 
 import lombok.Getter;
 import lombok.Setter;

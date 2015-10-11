@@ -9,12 +9,13 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<spring.version>3.2.8.RELEASE</spring.version>
+		<spring.version>4.1.1.RELEASE</spring.version>
+		<spring.data.jpa.version>1.6.4.RELEASE</spring.data.jpa.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
-        <hibernate.commons.annotation.version>4.0.5.Final</hibernate.commons.annotation.version>
-        <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
-        <hibernate.jpa21.version>1.0.0.Final</hibernate.jpa21.version>
-        <hibernate.tools.version>4.3.1.CR1</hibernate.tools.version>
+		<hibernate.commons.annotation.version>4.0.5.Final</hibernate.commons.annotation.version>
+		<hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+		<hibernate.jpa21.version>1.0.0.Final</hibernate.jpa21.version>
+		<hibernate.tools.version>4.3.1.CR1</hibernate.tools.version>
 		<jetty.version>6.1.26</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -55,6 +56,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.data.jpa.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -122,11 +128,35 @@
 			<version>1.2</version>
 			<classifier>sources</classifier>
 		</dependency>
-		
+
 		<dependency>
-		  <groupId>org.apache.commons</groupId>
-		  <artifactId>commons-dbcp2</artifactId>
-		  <version>2.1.1</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.9-RC1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.36</version>
 		</dependency>
 
 		<dependency>

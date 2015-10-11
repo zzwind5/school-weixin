@@ -1,4 +1,4 @@
-package com.wxapi.data.core;
+package com.data.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -13,18 +13,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
-public abstract class WxTimeStamp implements Serializable {
+public abstract class WxTimeStamp implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Getter
 	@Column(name="created_at")
-	private Timestamp createdAt;
+	protected Timestamp createdAt;
 	
 	@Getter @Setter
 	@Column(name="updated_at")
 	@Version
-	private Timestamp updatedAt;
+	protected Timestamp updatedAt;
 	
 	@PrePersist
 	void onCreate(){

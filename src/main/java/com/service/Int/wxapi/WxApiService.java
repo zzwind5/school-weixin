@@ -1,6 +1,6 @@
-package com.wxapi.service;
+package com.service.Int.wxapi;
 
-import com.wxapi.vo.WxTokenValidateVo;
+import com.data.vo.wxapi.WxTokenValidateVo;
 
 public interface WxApiService {
 
