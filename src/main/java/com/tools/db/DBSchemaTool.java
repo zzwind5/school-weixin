@@ -16,7 +16,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 public class DBSchemaTool {
 	
-	private static String PACKAGE_SCAN = "com.data.model";
+	private static String PACKAGE_SCAN = "com";
 	
 	private static final Configuration	configuration = new Configuration();
 	private static final Properties	prop = new Properties();

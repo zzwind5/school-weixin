@@ -1,8 +1,8 @@
-package com.data.repositories.wxapi;
+package com.wxapi.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.data.model.wxapi.WxUser;
+import com.wxapi.model.WxUser;
 
 public interface WxUserRepository extends JpaRepository<WxUser, Long> {
 

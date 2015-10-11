@@ -1,4 +1,4 @@
-package com.control.wxapi;
+package com.wxapi.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.data.vo.wxapi.WxTokenValidateVo;
-import com.service.wxapi.WxApiService;
+import com.wxapi.service.WxApiService;
+import com.wxapi.vo.WxTokenValidateVo;
 
 @Controller
 @RequestMapping("/wxapi")

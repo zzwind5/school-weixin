@@ -1,4 +1,4 @@
-package com.data.model.wxapi;
+package com.wxapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

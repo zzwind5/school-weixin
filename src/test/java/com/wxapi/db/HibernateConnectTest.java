@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.data.model.wxapi.WxOwner;
-import com.data.repositories.wxapi.WxOwnerRepository;
+import com.wxapi.model.WxOwner;
+import com.wxapi.repositories.WxOwnerRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
@@ -24,19 +24,18 @@ public class HibernateConnectTest {
 
 	@Test
 	public void connectionTest(){
-//		User user = userReposity.findById(5l);
-//		User user = userRep.findOne(2l);
-//		System.out.println(user);
+		WxOwner owner = wxOwnerRep.findOne(1l);
+		System.out.println(owner);
 	}
 	
-	@Test
-	public void addData(){
-		WxOwner owner = new WxOwner();
-		owner.setOwnerName("YCWGY_2015_02");
-		owner.setAppId("wx90cd81ea739f7004");
-		owner.setAppSecret("19579e6e7aae3f55a289e91a48a1df38");
-		owner.setToken("ycwgy");
-		owner.setDescription("育才外国语小学2015届2班");
-		wxOwnerRep.saveAndFlush(owner);
-	}
+//	@Test
+//	public void addData(){
+//		WxOwner owner = new WxOwner();
+//		owner.setOwnerName("YCWGY_2015_02");
+//		owner.setAppId("wx90cd81ea739f7004");
+//		owner.setAppSecret("19579e6e7aae3f55a289e91a48a1df38");
+//		owner.setToken("ycwgy");
+//		owner.setDescription("育才外国语小学2015届2班");
+//		wxOwnerRep.saveAndFlush(owner);
+//	}
 }

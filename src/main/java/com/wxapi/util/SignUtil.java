@@ -1,4 +1,4 @@
-package com.util.wxapi;
+package com.wxapi.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

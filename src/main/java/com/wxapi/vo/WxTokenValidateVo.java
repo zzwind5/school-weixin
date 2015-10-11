@@ -1,4 +1,4 @@
-package com.data.vo.wxapi;
+package com.wxapi.vo;
 
 import lombok.Getter;
 import lombok.Setter;
