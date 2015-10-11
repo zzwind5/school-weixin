@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.data.vo.wxapi.WxTokenValidateVo;
-import com.service.Int.wxapi.WxApiService;
+import com.service.wxapi.WxApiService;
 
 @Controller
 @RequestMapping("/wxapi")

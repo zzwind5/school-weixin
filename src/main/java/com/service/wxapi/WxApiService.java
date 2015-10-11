@@ -1,4 +1,4 @@
-package com.service.Int.wxapi;
+package com.service.wxapi;
 
 import com.data.vo.wxapi.WxTokenValidateVo;
 

@@ -1,9 +1,9 @@
-package com.service.impl.wxapi;
+package com.service.wxapi.impl;
 
 import org.springframework.stereotype.Component;
 
 import com.data.vo.wxapi.WxTokenValidateVo;
-import com.service.Int.wxapi.WxApiService;
+import com.service.wxapi.WxApiService;
 import com.util.wxapi.SignUtil;
 
 @Component
