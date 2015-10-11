@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class BaseVo {
+public abstract class WxRequestBaseVo {
 	
 	String ownerName;
 }
