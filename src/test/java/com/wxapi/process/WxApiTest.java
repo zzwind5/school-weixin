@@ -50,6 +50,7 @@ public class WxApiTest {
 		WxOwner wxOwner = wxOwnerRep.findOne(1l);
 		String url = String.format(TOKEN_URL, wxOwner.getAppId(), wxOwner.getAppSecret());
 		System.out.println(url);
+		// https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx90cd81ea739f7004&secret=19579e6e7aae3f55a289e91a48a1df38
 		
 //		String resStr = httpsRequest(url, "GET", null);
 //		String resStr = getAccess_token(url);
