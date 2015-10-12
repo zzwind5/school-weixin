@@ -1,12 +1,10 @@
 package com.wxapi.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Getter
-@Setter
+@Data
 public class WxAccessTokenVo {
 
 	@JsonProperty("access_token")
