@@ -22,20 +22,20 @@ public class HibernateConnectTest {
 //	@Autowired
 //	private BasicDataSource dataSource;
 
-	@Test
-	public void connectionTest(){
-		WxOwner owner = wxOwnerRep.findOne(1l);
-		System.out.println(owner);
-	}
-	
 //	@Test
-//	public void addData(){
-//		WxOwner owner = new WxOwner();
-//		owner.setOwnerName("YCWGY_2015_02");
-//		owner.setAppId("wx90cd81ea739f7004");
-//		owner.setAppSecret("19579e6e7aae3f55a289e91a48a1df38");
-//		owner.setToken("ycwgy");
-//		owner.setDescription("育才外国语小学2015届2班");
-//		wxOwnerRep.saveAndFlush(owner);
+//	public void connectionTest(){
+//		WxOwner owner = wxOwnerRep.findOne(1l);
+//		System.out.println(owner);
 //	}
+	
+	@Test
+	public void addData(){
+		WxOwner owner = new WxOwner();
+		owner.setOwnerName("YCWGY_2015_02");
+		owner.setAppId("wx90cd81ea739f7004");
+		owner.setAppSecret("19579e6e7aae3f55a289e91a48a1df38");
+		owner.setToken("ycwgy");
+		owner.setDescription("育才外国语小学2015届2班");
+		wxOwnerRep.saveAndFlush(owner);
+	}
 }

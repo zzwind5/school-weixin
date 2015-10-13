@@ -31,4 +31,7 @@ public class WxOwner extends BaseWxDo<Long> {
 	
 	@Column(name="token", length=DEFAULT_STRING_LENGTH)
 	private String token;
+	
+	@Column(name="menu", length=DEFAULT_LARGE_STRING_LENGTH)
+	private String menu;
 }
