@@ -1,5 +1,7 @@
 package com.wxapi.process;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -28,9 +30,9 @@ public class WxApiHelper {
 	}
 	
 	//发布菜单
-	public WxApiResultVo publishMenus(WxOwner wxOwner){
+	public WxApiResultVo publishMenus(WxOwner wxOwner) throws UnsupportedEncodingException{
 		String token = getWxAccessTokenVo(wxOwner).getAccessToken();
 		String url = String.format(MENU_CREATE, token);
-		return restTemplate.postForObject(url, wxOwner.getMenu(), WxApiResultVo.class);
+		return restTemplate.postForObject(url, wxOwner.getMenu().getBytes(), WxApiResultVo.class);
 	}
 }

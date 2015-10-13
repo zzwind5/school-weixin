@@ -1,5 +1,7 @@
 package com.wxapi.process;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +35,7 @@ public class WxApiHelperTest {
 	}
 	
 	@Test
-	public void publishMenus(){
+	public void publishMenus() throws UnsupportedEncodingException{
 		System.out.println(wxApiHelper.publishMenus(owner));
 	}
 }
