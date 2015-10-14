@@ -6,16 +6,20 @@ import java.io.Writer;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSON;
+import net.sf.json.xml.XMLSerializer;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 
 @Slf4j
 public final class JsonUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static final XMLSerializer xmlTool = new XMLSerializer();
 //    private static final ObjectMapper xssSerializerObjectMapper = new AhXssSerializerObjectMapper();
 
     private static ObjectMapper getObjectMapper() {
@@ -94,6 +98,16 @@ public final class JsonUtil {
                     throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = getObjectMapper();
         return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, valueType));
+    }
+    
+    public static String xmlToJsonString(final String xmlStr) {
+    	JSON json = xmlTool.read(xmlStr);
+    	return json.toString(1);
+    }
+    
+    public static <T> T xmlToObject(final String xmlStr, final Class<T> valueType) {
+    	String jsonStr = xmlToJsonString(xmlStr);
+        return toObject(jsonStr, valueType);
     }
 
     private JsonUtil() {
