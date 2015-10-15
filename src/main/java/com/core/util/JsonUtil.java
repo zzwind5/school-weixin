@@ -5,14 +5,20 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSON;
-import net.sf.json.xml.XMLSerializer;
-
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.QuickWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
+
+import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSON;
+import net.sf.json.xml.XMLSerializer;
 
 
 @Slf4j
@@ -20,11 +26,42 @@ public final class JsonUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final XMLSerializer xmlTool = new XMLSerializer();
+    private static final XStream xstream = new XStream();
+    private static final XStream xstreamCdata = new XStream(new XppDriver() {
+		public HierarchicalStreamWriter createWriter(Writer out) {
+			return new PrettyPrintWriter(out) {
+				boolean CDATA = true;
+				
+				@SuppressWarnings("rawtypes")
+				public void startNode(String name, Class clazz) {
+					super.startNode(name, clazz);
+				}
+				protected void writeText(QuickWriter writer, String text) {
+					if (CDATA) {
+						writer.write("<![CDATA[");
+						writer.write(text);
+						writer.write("]]>");
+					} else {
+						writer.write(text);
+					}
+				}
+			};
+		}
+	});
+    
+    static {
+    	xstreamCdata.autodetectAnnotations(true);
+    	xstream.autodetectAnnotations(true);
+    }
 //    private static final ObjectMapper xssSerializerObjectMapper = new AhXssSerializerObjectMapper();
 
     private static ObjectMapper getObjectMapper() {
     	return mapper;
 //        return decodeForXss ? xssSerializerObjectMapper : mapper;
+    }
+    
+    private static XStream getXStream(boolean cdata) {
+    	return cdata ? xstreamCdata : xstream;
     }
 
     public static String toJsonStringRaw(final Object obj)
@@ -109,7 +146,15 @@ public final class JsonUtil {
     	String jsonStr = xmlToJsonString(xmlStr);
         return toObject(jsonStr, valueType);
     }
-
+    
+    public static String toXmlString(Object xmlObj) {
+    	return getXStream(false).toXML(xmlObj);
+    }
+    
+    public static String toXmlString(Object xmlObj, boolean cdata) {
+    	return getXStream(cdata).toXML(xmlObj);
+    }
+    
     private JsonUtil() {
         throw new AssertionError("JsonUtil should never be instantiated");
     }

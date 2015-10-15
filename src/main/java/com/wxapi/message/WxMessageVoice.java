@@ -10,6 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @EqualsAndHashCode(callSuper = true)
 @XStreamAlias("xml")
 public class WxMessageVoice extends WxMessageBase {
+	
+	MsgType msgType = MsgType.voice;
 
 	@JsonProperty("MediaId")
 	@XStreamAlias("MediaId")

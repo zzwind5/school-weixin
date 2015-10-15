@@ -1,27 +1,27 @@
 package com.wxapi.message;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "MsgType")
 @JsonSubTypes({
-      @JsonSubTypes.Type(name = "text",				value = WxMessageText.class)
-    , @JsonSubTypes.Type(name = "image",				value = WxMessageImage.class)
-    , @JsonSubTypes.Type(name = "voice",				value = WxMessageVoice.class)
-    , @JsonSubTypes.Type(name = "video",				value = WxMessageVideo.class)
-    , @JsonSubTypes.Type(name = "shortvideo",		value = WxMessageVideoShort.class)
-	, @JsonSubTypes.Type(name = "location",			value = WxMessageLocation.class)
-	, @JsonSubTypes.Type(name = "link",				value = WxMessageLink.class)
+      @Type(name = "text",				value = WxMessageText.class)
+    , @Type(name = "image",				value = WxMessageImage.class)
+    , @Type(name = "voice",				value = WxMessageVoice.class)
+    , @Type(name = "video",				value = WxMessageVideo.class)
+    , @Type(name = "shortvideo",		value = WxMessageVideoShort.class)
+	, @Type(name = "location",			value = WxMessageLocation.class)
+	, @Type(name = "link",				value = WxMessageLink.class)
 })
 @Data
 @EqualsAndHashCode
-public abstract class WxMessageBase {
+public abstract class WxMessageBase implements Cloneable {
 
 	@JsonProperty("ToUserName")
 	@XStreamAlias("ToUserName")
@@ -35,9 +35,9 @@ public abstract class WxMessageBase {
 	@XStreamAlias("CreateTime")
 	private Long createTime;
 	
-	@JsonProperty("msgType")
-	@XStreamAlias("msgType")
-	private MsgType msgType;
+	@JsonProperty("MsgType")
+	@XStreamAlias("MsgType")
+	protected MsgType msgType;
 	
 	@JsonProperty("MsgId")
 	@XStreamAlias("MsgId")

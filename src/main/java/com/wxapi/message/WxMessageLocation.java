@@ -10,6 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @EqualsAndHashCode(callSuper = true)
 @XStreamAlias("xml")
 public class WxMessageLocation extends WxMessageBase {
+	
+	MsgType msgType = MsgType.location;
 
 	@JsonProperty("Location_X")
 	@XStreamAlias("Location_X")

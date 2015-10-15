@@ -10,6 +10,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @XStreamAlias("xml")
 public class WxMessageLink extends WxMessageBase {
+	
+	MsgType msgType = MsgType.link;
 
 	@JsonProperty("Title")
 	@XStreamAlias("Title")

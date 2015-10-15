@@ -1,15 +1,12 @@
-package WxMessageLink;
-
-import net.sf.json.JSON;
-import net.sf.json.xml.XMLSerializer;
+package com.wxapi.message;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.core.util.JsonUtil;
-import com.wxapi.message.MsgType;
-import com.wxapi.message.WxMessageBase;
-import com.wxapi.message.WxMessageText;
+
+import net.sf.json.JSON;
+import net.sf.json.xml.XMLSerializer;
 
 public class WxMessageTest {
 	
@@ -46,5 +43,10 @@ public class WxMessageTest {
 		System.out.println(json.toString(1));
 		
 		System.out.println(JsonUtil.xmlToObject(xmlStr, WxMessageBase.class));
+	}
+	
+	@Test
+	public void messageObjToXml(){
+		System.out.println(JsonUtil.toXmlString(textMsg, true));
 	}
 }
