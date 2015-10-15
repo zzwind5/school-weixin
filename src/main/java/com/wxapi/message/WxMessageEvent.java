@@ -1,13 +1,13 @@
 package com.wxapi.message;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -23,7 +23,7 @@ public class WxMessageEvent extends WxMessageBase {
 
 	@JsonProperty("EventKey")
 	@XStreamAlias("EventKey")
-	private String eventKey;
+	private WxMenuKey eventKey;
 	
 	@JsonIgnore
 	@XStreamOmitField

@@ -1,13 +1,11 @@
 package com.wxapi.control;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wxapi.service.WxApiService;
@@ -29,19 +27,12 @@ public class WxApiCtl {
 		return wxApiService.validateToken(tokenVo);
 	}
 	
-	//创建微信公众账号菜单
-	@RequestMapping(value = "/publishMenu")
-	@ResponseBody
-	public String publishMenu(String ownerName) {
-		WxApiResultVo resVo = wxApiService.publishMenu(ownerName);
-		return resVo.getErrmsg();
-	}
-	
 	/**
 	 * POST 请求：进行消息处理；
 	 * */
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
-	public @ResponseBody String doPost(HttpServletRequest request,@PathVariable String account,HttpServletResponse response) {
+	public @ResponseBody String doPost(@RequestBody String requestMsg,
+			@RequestParam String ownerName) {
 //		//处理用户和微信公众账号交互消息
 //		Account accountObj = myService.getByAccount(account);//获取account
 //		try {
@@ -52,5 +43,13 @@ public class WxApiCtl {
 //			return "error";
 //		}
 		return null;
+	}
+	
+	//创建微信公众账号菜单
+	@RequestMapping(value = "/publishMenu")
+	@ResponseBody
+	public String publishMenu(String ownerName) {
+		WxApiResultVo resVo = wxApiService.publishMenu(ownerName);
+		return resVo.getErrmsg();
 	}
 }

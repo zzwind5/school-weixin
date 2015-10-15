@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import com.data.model.BaseWxDoInVhm;
+import com.wxapi.message.WxMenuKey;
 import com.wxapi.message.WxMsgType;
 
 @Entity
@@ -35,4 +38,8 @@ public abstract class WxSchoolMessage extends BaseWxDoInVhm {
 	
 	@Column(name="msg_id")
 	private Long msgId;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="wx_menu_key", length=DEFAULT_STRING_LENGTH)
+	private WxMenuKey wxMenuKey;
 }

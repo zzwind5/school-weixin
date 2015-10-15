@@ -3,10 +3,10 @@ package com.wxapi.model;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import com.wxapi.message.WxMsgType;
 
@@ -17,7 +17,7 @@ public class WxSchoolMessageVoice extends WxSchoolMessage {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
+	@Transient
 	protected WxMsgType wxMsgType = WxMsgType.voice;
 
 	@Column(name="media_id")
