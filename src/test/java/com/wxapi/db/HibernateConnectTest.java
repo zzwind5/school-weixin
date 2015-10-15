@@ -32,10 +32,10 @@ public class HibernateConnectTest {
 	public void addData(){
 		WxOwner owner = new WxOwner();
 		owner.setOwnerName("YCWGY_2015_02");
-		owner.setAppId("wx90cd81ea739f7004");
-		owner.setAppSecret("19579e6e7aae3f55a289e91a48a1df38");
+		owner.setAppId("wxa584a4fc4524fb16");
+		owner.setAppSecret("92bb7b53397be2cb0677971a26d5f011");
 		owner.setToken("ycwgy");
-		owner.setDescription("1111");
+		owner.setDescription("育才外国语小学2015届2班");
 		wxOwnerRep.saveAndFlush(owner);
 	}
 }

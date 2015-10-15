@@ -8,6 +8,7 @@ import com.wxapi.message.WxMsgType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Data @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -15,6 +16,9 @@ import lombok.EqualsAndHashCode;
 public class WxSchoolMessageImage extends WxSchoolMessage {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Getter
+	protected WxMsgType wxMsgType = WxMsgType.image;
 
 	@Column(name="pic_url", length=DEFAULT_URL_LENGTH)
 	private String picUrl;
