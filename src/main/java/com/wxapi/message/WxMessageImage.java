@@ -5,13 +5,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @XStreamAlias("xml")
 public class WxMessageImage extends WxMessageBase {
 	
-	MsgType msgType = MsgType.image;
+	WxMsgType msgType = WxMsgType.image;
 	
 	@JsonProperty("PicUrl")
 	@XStreamAlias("PicUrl")

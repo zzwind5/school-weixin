@@ -1,17 +1,19 @@
 package com.wxapi.message;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @XStreamAlias("xml")
 public class WxMessageVoice extends WxMessageBase {
 	
-	MsgType msgType = MsgType.voice;
+	WxMsgType msgType = WxMsgType.voice;
 
 	@JsonProperty("MediaId")
 	@XStreamAlias("MediaId")
@@ -19,5 +21,5 @@ public class WxMessageVoice extends WxMessageBase {
 	
 	@JsonProperty("Format")
 	@XStreamAlias("Format")
-	private Long format;
+	private String format;
 }

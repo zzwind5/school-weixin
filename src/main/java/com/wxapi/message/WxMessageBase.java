@@ -11,13 +11,14 @@ import lombok.EqualsAndHashCode;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "MsgType")
 @JsonSubTypes({
-      @Type(name = "text",				value = WxMessageText.class)
-    , @Type(name = "image",				value = WxMessageImage.class)
-    , @Type(name = "voice",				value = WxMessageVoice.class)
-    , @Type(name = "video",				value = WxMessageVideo.class)
-    , @Type(name = "shortvideo",		value = WxMessageVideoShort.class)
-	, @Type(name = "location",			value = WxMessageLocation.class)
-	, @Type(name = "link",				value = WxMessageLink.class)
+      @Type(name = WxMsgType.TEXT,				value = WxMessageText.class)
+    , @Type(name = WxMsgType.IMAGE,				value = WxMessageImage.class)
+    , @Type(name = WxMsgType.VOICE,				value = WxMessageVoice.class)
+    , @Type(name = WxMsgType.VIDEO,				value = WxMessageVideo.class)
+    , @Type(name = WxMsgType.SHORT_VIDEO,		value = WxMessageVideoShort.class)
+	, @Type(name = WxMsgType.LOCATION,			value = WxMessageLocation.class)
+	, @Type(name = WxMsgType.LINK,				value = WxMessageLink.class)
+	, @Type(name = WxMsgType.EVENT,				value = WxMessageEvent.class)
 })
 @Data
 @EqualsAndHashCode
@@ -37,9 +38,9 @@ public abstract class WxMessageBase implements Cloneable {
 	
 	@JsonProperty("MsgType")
 	@XStreamAlias("MsgType")
-	protected MsgType msgType;
+	protected WxMsgType msgType;
 	
 	@JsonProperty("MsgId")
 	@XStreamAlias("MsgId")
-	private Long msgId;
+	protected Long msgId;
 }

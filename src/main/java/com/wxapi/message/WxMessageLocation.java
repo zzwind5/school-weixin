@@ -2,16 +2,18 @@ package com.wxapi.message;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @XStreamAlias("xml")
 public class WxMessageLocation extends WxMessageBase {
 	
-	MsgType msgType = MsgType.location;
+	WxMsgType msgType = WxMsgType.location;
 
 	@JsonProperty("Location_X")
 	@XStreamAlias("Location_X")

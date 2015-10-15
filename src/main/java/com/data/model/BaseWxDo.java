@@ -12,7 +12,8 @@ import lombok.Setter;
 
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = false, of = {})
-public abstract class BaseWxDo<PK extends Serializable> extends WxTimeStamp implements WxDo {
+public abstract class BaseWxDo<PK extends Serializable> extends WxTimeStamp 
+	implements WxDo, Cloneable, Serializable {
 
 	private static final long serialVersionUID = -9892832637945768L;
 

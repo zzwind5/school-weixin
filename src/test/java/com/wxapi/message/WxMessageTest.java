@@ -18,7 +18,7 @@ public class WxMessageTest {
 		textMsg.setToUserName("zhang");
 		textMsg.setFromUserName("yang");
 		textMsg.setContent("This is a test message");
-		textMsg.setMsgType(MsgType.text);
+		textMsg.setMsgType(WxMsgType.text);
 		textMsg.setMsgId(1234567L);
 		textMsg.setCreateTime(System.currentTimeMillis());
 	}
@@ -48,5 +48,18 @@ public class WxMessageTest {
 	@Test
 	public void messageObjToXml(){
 		System.out.println(JsonUtil.toXmlString(textMsg, true));
+	}
+	
+	@Test
+	public void eventStringToObject(){
+		String eventStr = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[CLICK]]></Event><EventKey><![CDATA[EVENTKEY]]></EventKey></xml>";
+//		String jsonStr = JsonUtil.xmlToJsonString(eventStr);
+//		System.out.println(jsonStr);
+		WxMessageBase msgObj = JsonUtil.xmlToObject(eventStr, WxMessageBase.class);
+		System.out.println(msgObj);
+		msgObj.setMsgId(1111l);
+		
+		System.out.println(JsonUtil.toXmlString(msgObj, true));
+		System.out.println(JsonUtil.toJsonString(msgObj));
 	}
 }
