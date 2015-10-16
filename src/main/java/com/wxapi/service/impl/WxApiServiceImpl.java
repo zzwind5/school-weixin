@@ -120,7 +120,9 @@ public class WxApiServiceImpl implements WxApiService {
 		textMsg.setFromUserName(messageBase.getToUserName());
 		textMsg.setToUserName(messageBase.getFromUserName());
 		textMsg.setCreateTime(System.currentTimeMillis());
-		textMsg.setContent("Welcome!");
+		
+		WxOwner wxOwner = ownerCache.getWxOwner("YCWGY_2015_02");
+		textMsg.setContent("<h3>" +wxOwner.getDescription()+"</h3>");
 		return textMsg;
 	}
 

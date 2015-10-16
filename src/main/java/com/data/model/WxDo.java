@@ -4,6 +4,7 @@ public interface WxDo {
 
 	public static final short DEFAULT_SHORT_STRING_LENGTH = 16;
 	public static final short DEFAULT_STRING_LENGTH = 32;
+	public static final short STRING_128 = 128;
 	public static final short STRING_256 = 256;
 	public static final short STRING_512 = 512;
 	public static final short DEFAULT_LONG_STRING_LENGTH = 64;

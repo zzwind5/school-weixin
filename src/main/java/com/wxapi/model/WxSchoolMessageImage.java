@@ -23,6 +23,6 @@ public class WxSchoolMessageImage extends WxSchoolMessage {
 	@Column(name="pic_url", length=DEFAULT_URL_LENGTH)
 	private String picUrl;
 	
-	@Column(name="media_id")
-	private Long mediaId;
+	@Column(name="media_id", length=STRING_128)
+	private String mediaId;
 }

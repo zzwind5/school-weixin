@@ -17,9 +17,9 @@ public class WxMessageVideoShort extends WxMessageBase {
 
 	@JsonProperty("MediaId")
 	@XStreamAlias("MediaId")
-	private Long mediaId;
+	private String mediaId;
 	
 	@JsonProperty("ThumbMediaId")
 	@XStreamAlias("ThumbMediaId")
-	private Long thumbMediaId;
+	private String thumbMediaId;
 }

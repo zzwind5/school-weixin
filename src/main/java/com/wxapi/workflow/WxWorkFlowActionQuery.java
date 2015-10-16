@@ -33,7 +33,7 @@ public class WxWorkFlowActionQuery extends WxWorkFlowActionAbstract {
 		msgText.setFromUserName(message.getToUserName());
 		msgText.setToUserName(message.getFromUserName());
 		msgText.setCreateTime(System.currentTimeMillis());
-		msgText.setContent("Wait for the implementation.");
+		msgText.setContent("查询功能开发中");
 		
 		return msgText;
 	}

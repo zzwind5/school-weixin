@@ -21,6 +21,6 @@ public class WxMessageImage extends WxMessageBase {
 	
 	@JsonProperty("MediaId")
 	@XStreamAlias("MediaId")
-	private Long mediaId;
+	private String mediaId;
 	
 }

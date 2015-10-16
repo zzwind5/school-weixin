@@ -20,9 +20,9 @@ public class WxSchoolMessageVideo extends WxSchoolMessage {
 	@Transient
 	protected WxMsgType wxMsgType = WxMsgType.video;
 
-	@Column(name="media_id")
-	private Long mediaId;
+	@Column(name="media_id", length=STRING_128)
+	private String mediaId;
 	
-	@Column(name="thumb_media_id")
-	private Long thumbMediaId;
+	@Column(name="thumb_media_id", length=STRING_128)
+	private String thumbMediaId;
 }

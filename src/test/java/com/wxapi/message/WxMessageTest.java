@@ -52,7 +52,7 @@ public class WxMessageTest {
 	
 	@Test
 	public void eventStringToObject(){
-		String eventStr = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[CLICK]]></Event><EventKey><![CDATA[EVENTKEY]]></EventKey></xml>";
+		String eventStr = "<xml><ToUserName><![CDATA[]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[CLICK]]></Event><EventKey><![CDATA[RELEASE_CHINESE]]></EventKey></xml>";
 //		String jsonStr = JsonUtil.xmlToJsonString(eventStr);
 //		System.out.println(jsonStr);
 		WxMessageBase msgObj = JsonUtil.xmlToObject(eventStr, WxMessageBase.class);

@@ -5,6 +5,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSON;
+import net.sf.json.xml.XMLSerializer;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -14,10 +18,6 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
-
-import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSON;
-import net.sf.json.xml.XMLSerializer;
 
 
 @Slf4j
@@ -137,7 +137,8 @@ public final class JsonUtil {
     }
     
     public static String xmlToJsonString(final String xmlStr) {
-    	JSON json = xmlTool.read(xmlStr);
+    	String xmlRepl = xmlStr.replace("<![CDATA[]]>", "<![CDATA[null]]>");
+    	JSON json = xmlTool.read(xmlRepl);
     	return json.toString(1);
     }
     

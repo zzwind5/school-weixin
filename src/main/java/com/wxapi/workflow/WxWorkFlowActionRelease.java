@@ -78,6 +78,7 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 			WxSchoolMessageVoice voiceEntity = new WxSchoolMessageVoice();
 			voiceEntity.setMediaId(msgVoice.getMediaId());
 			voiceEntity.setFormat(msgVoice.getFormat());
+			voiceEntity.setRecognition(msgVoice.getRecognition());
 			wxMessageEntity = voiceEntity;
 		} else if (messageSecond instanceof WxMessageVideo) {
 			WxMessageVideo msgVideo = (WxMessageVideo)messageSecond;
@@ -87,7 +88,7 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 			wxMessageEntity = videoEntity;
 		}
 		
-		wxMessageEntity.setFromUserName(messageFirst.getToUserName());
+		wxMessageEntity.setFromUserName(messageFirst.getFromUserName());
 		wxMessageEntity.setOwnerId(messageFirst.getOwnerId());
 		wxMessageEntity.setWxMenuKey(messageFirst.getEventKey());
 		
@@ -113,9 +114,9 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 		responseText.setCreateTime(System.currentTimeMillis());
 		
 		if (stepIndex == 0) {
-			responseText.setContent("�����뷢������");
+			responseText.setContent("请输入发布的内容");
 		} else if (stepIndex == 1) {
-			responseText.setContent("�����ɹ�");
+			responseText.setContent("发布成功");
 		}
 		
 		return responseText;

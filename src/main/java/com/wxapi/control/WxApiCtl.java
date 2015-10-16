@@ -1,5 +1,7 @@
 package com.wxapi.control;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +33,12 @@ public class WxApiCtl {
 	
 	/**
 	 * POST 请求：进行消息处理；
+	 * @throws UnsupportedEncodingException 
 	 * */
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
 	public @ResponseBody String doPost(@RequestBody String requestMsg,
 			@RequestParam String ownerName) {
+		
 		WxMessageBase msgBase = wxApiService.wxMessageHandle(requestMsg, ownerName);
 		return JsonUtil.toXmlString(msgBase, true);
 	}

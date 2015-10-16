@@ -1,11 +1,11 @@
 package com.wxapi.message;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -17,9 +17,13 @@ public class WxMessageVoice extends WxMessageBase {
 
 	@JsonProperty("MediaId")
 	@XStreamAlias("MediaId")
-	private Long mediaId;
+	private String mediaId;
 	
 	@JsonProperty("Format")
 	@XStreamAlias("Format")
 	private String format;
+	
+	@JsonProperty("Recognition")
+	@XStreamAlias("Recognition")
+	private String recognition;
 }

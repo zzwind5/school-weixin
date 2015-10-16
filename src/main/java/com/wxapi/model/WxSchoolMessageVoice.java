@@ -20,9 +20,12 @@ public class WxSchoolMessageVoice extends WxSchoolMessage {
 	@Transient
 	protected WxMsgType wxMsgType = WxMsgType.voice;
 
-	@Column(name="media_id")
-	private Long mediaId;
+	@Column(name="media_id", length=STRING_128)
+	private String mediaId;
 	
 	@Column(name="format", length=DEFAULT_SHORT_STRING_LENGTH)
 	private String format;
+	
+	@Column(name="recognition", length=STRING_128)
+	private String recognition;
 }
