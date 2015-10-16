@@ -20,15 +20,10 @@ import com.wxapi.model.WxSchoolMessageVoice;
 import com.wxapi.repositories.WxSchoolMessageRepository;
 
 @Component
-public class WxWorkFlowActionRelease extends WxWorkFlowActionAbstract {
+public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 	
 	@Autowired
-	private WxSchoolMessageRepository schMsgRep;
-
-	@Override
-	public boolean needStartWorkFlow(WxMessageBase message) {
-		return isNextStepMatch(0, message);
-	}
+	private WxSchoolMessageRepository wxSchoolMessageRepository;
 
 	@Override
 	public int getStepCount() {
@@ -61,7 +56,7 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionAbstract {
 	}
 
 	@Override
-	public void closeWorkFlow(WxWorkflowCtx workFlowCtx) {
+	public void closeCachedWorkFlow(WxWorkflowCtx workFlowCtx) {
 		WxSchoolMessage wxMessageEntity = null;
 		
 		WxMessageEvent messageFirst = (WxMessageEvent)workFlowCtx.getWxMessage(0);
@@ -95,7 +90,8 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionAbstract {
 		wxMessageEntity.setFromUserName(messageFirst.getToUserName());
 		wxMessageEntity.setOwnerId(messageFirst.getOwnerId());
 		wxMessageEntity.setWxMenuKey(messageFirst.getEventKey());
-		schMsgRep.saveAndFlush(wxMessageEntity);
+		
+		wxSchoolMessageRepository.saveAndFlush(wxMessageEntity);
 		workFlowCtxCache.clearWxWorkflowCtx(workFlowCtx);
 	}
 
@@ -117,9 +113,9 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionAbstract {
 		responseText.setCreateTime(System.currentTimeMillis());
 		
 		if (stepIndex == 0) {
-			responseText.setContent("ÇëÊäÈë·¢²¼ÄÚÈÝ");
+			responseText.setContent("ï¿½ï¿½ï¿½ï¿½ï¿½ë·¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		} else if (stepIndex == 1) {
-			responseText.setContent("·¢²¼³É¹¦");
+			responseText.setContent("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 		}
 		
 		return responseText;

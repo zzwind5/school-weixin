@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.wxapi.message.WxMessageBase;
+
 @Component
 public class WxWorkflowManager {
 
@@ -16,5 +18,15 @@ public class WxWorkflowManager {
 	
 	public WxWorkFlowAction getWorkFlowAction(String actionKey) {
 		return registerMap.get(actionKey);
+	}
+	
+	public WxWorkFlowAction getMatchedWorkFlowAction(WxMessageBase messageBase) {
+		for (WxWorkFlowAction wfAction : registerMap.values()) {
+			if (wfAction.isActionMatch(messageBase)) {
+				return wfAction;
+			}
+		}
+		
+		return null;
 	}
 }

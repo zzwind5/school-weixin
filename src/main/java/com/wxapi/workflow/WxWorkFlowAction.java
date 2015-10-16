@@ -4,17 +4,9 @@ import com.wxapi.message.WxMessageBase;
 
 public interface WxWorkFlowAction {
 	
-	boolean needStartWorkFlow(WxMessageBase message);
+	void register();
 	
-	int getStepCount();
-	
-	WxWorkflowCtx startWorkFlow(WxMessageBase message);
-	
-	void closeWorkFlow(WxWorkflowCtx workFlowCtx);
-	
-	boolean isNextStepMatch(int nextStepIdx, WxMessageBase message);
+	boolean isActionMatch(WxMessageBase message);
 	
 	WxMessageBase process(WxMessageBase message);
-	
-	WxMessageBase getResponseMsg(int stepIndex, String fromUserName, Long ownerId);
 }

@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 import com.core.util.JsonUtil;
 import com.wxapi.cache.WxOwnerCache;
 import com.wxapi.cache.WxWorkflowCtxCache;
-import com.wxapi.message.WxEventType;
 import com.wxapi.message.WxMessageBase;
-import com.wxapi.message.WxMessageEvent;
+import com.wxapi.message.WxMessageText;
 import com.wxapi.model.WxOwner;
 import com.wxapi.process.WxApiHelper;
 import com.wxapi.service.WxApiService;
@@ -18,6 +17,7 @@ import com.wxapi.util.SignUtil;
 import com.wxapi.vo.WxApiResultVo;
 import com.wxapi.vo.WxTokenValidateVo;
 import com.wxapi.workflow.WxWorkFlowAction;
+import com.wxapi.workflow.WxWorkFlowActionCached;
 import com.wxapi.workflow.WxWorkflowCtx;
 import com.wxapi.workflow.WxWorkflowManager;
 
@@ -64,25 +64,25 @@ public class WxApiServiceImpl implements WxApiService {
 		WxMessageBase messageBase = JsonUtil.xmlToObject(requestMsg, WxMessageBase.class);
 		messageBase.setOwnerId(wxOwner.getId());
 		
+		//Cached event handle, step 2, 3, 4 .....
 		WxMessageBase responseMsg = cachedWorkFlowHandle(messageBase);
 		if (responseMsg != null) {
 			return responseMsg;
 		}
 		
-		return null;
+		//For that no need cache or start a cached work flow.
+		responseMsg = firstTimeWorkFlowHandle(messageBase);
+		if (responseMsg != null) {
+			return responseMsg;
+		}
+		
+		//return a welcome message.
+		responseMsg = createDefaultMessage(messageBase);
+		
+		return responseMsg;
 	}
 	
-	/**
-	 * 对微信 事件的处理，比如菜单点击事件
-	 * @param msgEvent
-	 * @return
-	 */
-	private String wxMessageEventHandle(WxMessageEvent msgEvent) {
-		if (msgEvent.getEvent() == WxEventType.CLICK) {
-			return clickEventHandle(msgEvent);
-		}
-		return null;
-	}
+	/** Private function start ***************************************************************/
 	
 	private WxMessageBase cachedWorkFlowHandle(WxMessageBase messageBase) {
 		WxWorkflowCtx workFlowCtx = workFlowCache.getWxWorkflowCtx(messageBase.getFromUserName(), messageBase.getOwnerId());
@@ -91,18 +91,37 @@ public class WxApiServiceImpl implements WxApiService {
 			return null;
 		}
 		
-		WxWorkFlowAction wfAction = workFlowManager.getWorkFlowAction(workFlowCtx.getWorkFlowActionKey());
+		WxWorkFlowActionCached cachedAction = (WxWorkFlowActionCached)workFlowManager.getWorkFlowAction(workFlowCtx.getWorkFlowActionKey());
 		int nextStepIndex = workFlowCtx.getNextStepIndex();
-		if (!wfAction.isNextStepMatch(nextStepIndex, messageBase)) {
+		if (!cachedAction.isNextStepMatch(nextStepIndex, messageBase)) {
 			return null;
 		}
 		
-		return wfAction.process(messageBase);
+		return cachedAction.process(messageBase);
 	}
 	
-	private String clickEventHandle(WxMessageEvent msgEvent) {
+	private WxMessageBase firstTimeWorkFlowHandle(WxMessageBase messageBase) {
+		WxWorkFlowAction workFlowAction = workFlowManager.getMatchedWorkFlowAction(messageBase);
+		if (workFlowAction == null) {
+			//No matched work flow handle.
+			return null;
+		}
 		
-		return null;
+		if (workFlowAction instanceof WxWorkFlowActionCached) {
+			WxWorkFlowActionCached cachedAction = (WxWorkFlowActionCached)workFlowAction;
+			return cachedAction.startCachedWorkFlow(messageBase);
+		} else {
+			return workFlowAction.process(messageBase);
+		}
+	}
+	
+	private WxMessageBase createDefaultMessage(WxMessageBase messageBase) {
+		WxMessageText textMsg = new WxMessageText();
+		textMsg.setFromUserName(messageBase.getToUserName());
+		textMsg.setToUserName(messageBase.getFromUserName());
+		textMsg.setCreateTime(System.currentTimeMillis());
+		textMsg.setContent("Welcome!");
+		return textMsg;
 	}
 
 }
