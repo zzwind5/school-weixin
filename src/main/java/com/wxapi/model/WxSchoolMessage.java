@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import com.data.model.BaseWxDoInVhm;
-import com.wxapi.message.WxMenuKey;
+import com.wxapi.message.WxEventOperation;
 import com.wxapi.message.WxMsgType;
 
 @Entity
@@ -41,5 +41,5 @@ public abstract class WxSchoolMessage extends BaseWxDoInVhm {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="wx_menu_key", length=DEFAULT_STRING_LENGTH)
-	private WxMenuKey wxMenuKey;
+	private WxEventOperation wxMenuKey;
 }

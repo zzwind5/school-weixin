@@ -1,10 +1,12 @@
 package com.wxapi.message;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,4 +45,8 @@ public abstract class WxMessageBase implements Cloneable {
 	@JsonProperty("MsgId")
 	@XStreamAlias("MsgId")
 	protected Long msgId;
+	
+	@JsonIgnore
+	@XStreamOmitField
+	private Long ownerId;
 }

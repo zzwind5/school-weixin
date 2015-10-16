@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.core.util.JsonUtil;
+import com.wxapi.message.WxMessageBase;
 import com.wxapi.service.WxApiService;
 import com.wxapi.vo.WxApiResultVo;
 import com.wxapi.vo.WxTokenValidateVo;
@@ -33,16 +35,8 @@ public class WxApiCtl {
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
 	public @ResponseBody String doPost(@RequestBody String requestMsg,
 			@RequestParam String ownerName) {
-//		//处理用户和微信公众账号交互消息
-//		Account accountObj = myService.getByAccount(account);//获取account
-//		try {
-//			MsgRequest msgRequest = MsgXmlUtil.parseXml(request);//获取发送的消息
-//			return myService.processMsg(msgRequest,accountObj);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return "error";
-//		}
-		return null;
+		WxMessageBase msgBase = wxApiService.wxMessageHandle(requestMsg, ownerName);
+		return JsonUtil.toXmlString(msgBase, true);
 	}
 	
 	//创建微信公众账号菜单

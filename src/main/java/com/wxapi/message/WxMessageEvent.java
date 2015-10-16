@@ -23,7 +23,7 @@ public class WxMessageEvent extends WxMessageBase {
 
 	@JsonProperty("EventKey")
 	@XStreamAlias("EventKey")
-	private WxMenuKey eventKey;
+	private WxEventOperation eventKey;
 	
 	@JsonIgnore
 	@XStreamOmitField
