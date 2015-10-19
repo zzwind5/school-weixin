@@ -31,6 +31,9 @@ public abstract class WxSchoolMessage extends BaseWxDoInVhm {
 	@Column(name="from_user_name", length=DEFAULT_STRING_LENGTH)
 	private String fromUserName;
 	
+	@Column(name="to_user_name", length=DEFAULT_STRING_LENGTH)
+	private String toUserName;
+	
 //	@Enumerated(EnumType.STRING)
 //	@Column(name="msg_type", length=DEFAULT_SHORT_STRING_LENGTH)
 	@Transient

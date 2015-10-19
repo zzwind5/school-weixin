@@ -1,15 +1,19 @@
 package com.wxapi.workflow;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.wxapi.cache.WxHomeWorkCache;
 import com.wxapi.message.WxEventOperation;
 import com.wxapi.message.WxEventType;
 import com.wxapi.message.WxMessageBase;
 import com.wxapi.message.WxMessageEvent;
-import com.wxapi.message.WxMessageText;
 
 @Component
 public class WxWorkFlowActionQuery extends WxWorkFlowActionAbstract {
+	
+	@Autowired
+	private WxHomeWorkCache homeWorkCache;
 
 	@Override
 	public boolean isActionMatch(WxMessageBase message) {
@@ -29,13 +33,11 @@ public class WxWorkFlowActionQuery extends WxWorkFlowActionAbstract {
 
 	@Override
 	public WxMessageBase process(WxMessageBase message) {
-		WxMessageText msgText = new WxMessageText();
-		msgText.setFromUserName(message.getToUserName());
-		msgText.setToUserName(message.getFromUserName());
-		msgText.setCreateTime(System.currentTimeMillis());
-		msgText.setContent("查询功能开发中");
+		if (message instanceof WxMessageEvent) {
+			return homeWorkCache.queryHomeWork((WxMessageEvent)message);
+		}
 		
-		return msgText;
+		return null;
 	}
 
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.core.util.WxMessageUtil;
+import com.wxapi.cache.WxHomeWorkCache;
 import com.wxapi.message.WxEventOperation;
 import com.wxapi.message.WxEventType;
 import com.wxapi.message.WxMessageBase;
@@ -25,6 +26,9 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 	
 	@Autowired
 	private WxSchoolMessageRepository wxSchoolMessageRepository;
+	
+	@Autowired
+	private WxHomeWorkCache homeWorkCache;
 
 	@Override
 	public int getStepCount() {
@@ -90,11 +94,13 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 		}
 		
 		wxMessageEntity.setFromUserName(messageFirst.getFromUserName());
+		wxMessageEntity.setToUserName(messageFirst.getToUserName());
 		wxMessageEntity.setOwnerId(messageFirst.getOwnerId());
 		wxMessageEntity.setWxMenuKey(messageFirst.getEventKey());
 		
 		wxSchoolMessageRepository.saveAndFlush(wxMessageEntity);
 		workFlowCtxCache.clearWxWorkflowCtx(workFlowCtx);
+		homeWorkCache.cache(wxMessageEntity);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.wxapi.message.response.WxMessageResponseNews;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "MsgType")
 @JsonSubTypes({
@@ -21,7 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 	, @Type(name = WxMsgType.LOCATION,			value = WxMessageLocation.class)
 	, @Type(name = WxMsgType.LINK,				value = WxMessageLink.class)
 	, @Type(name = WxMsgType.EVENT,				value = WxMessageEvent.class)
-	, @Type(name = WxMsgType.NEWS,				value = WxMessageNews.class)
+	, @Type(name = WxMsgType.NEWS,				value = WxMessageResponseNews.class)
 })
 @Data
 @EqualsAndHashCode

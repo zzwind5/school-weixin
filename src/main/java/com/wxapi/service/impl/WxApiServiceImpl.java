@@ -9,9 +9,8 @@ import com.core.util.JsonUtil;
 import com.wxapi.cache.WxOwnerCache;
 import com.wxapi.cache.WxWorkflowCtxCache;
 import com.wxapi.message.WxMessageBase;
-import com.wxapi.message.WxMessageNews;
-import com.wxapi.message.WxMessageNewsItem;
-import com.wxapi.message.WxMessageText;
+import com.wxapi.message.response.WxMessageResponseNews;
+import com.wxapi.message.response.WxMessageNewsItem;
 import com.wxapi.model.WxOwner;
 import com.wxapi.process.WxApiHelper;
 import com.wxapi.service.WxApiService;
@@ -118,22 +117,10 @@ public class WxApiServiceImpl implements WxApiService {
 		}
 	}
 	
-	private WxMessageBase createDefaultMessage(WxMessageBase messageBase) {
-		WxMessageText textMsg = new WxMessageText();
-		textMsg.setFromUserName(messageBase.getToUserName());
-		textMsg.setToUserName(messageBase.getFromUserName());
-		textMsg.setCreateTime(System.currentTimeMillis());
-		
-		WxOwner wxOwner = ownerCache.getWxOwner("YCWGY_2015_02");
-		textMsg.setContent(wxOwner.getDescription());
-		return textMsg;
-	}
-	
 	private WxMessageBase createDefaultMessageNews(WxMessageBase messageBase) {
-		WxMessageNews newMsg = new WxMessageNews();
+		WxMessageResponseNews newMsg = new WxMessageResponseNews();
 		newMsg.setFromUserName(messageBase.getToUserName());
 		newMsg.setToUserName(messageBase.getFromUserName());
-		newMsg.setContent("这个是测试消息");
 		newMsg.setCreateTime(System.currentTimeMillis());
 		newMsg.setArticleCount(1);
 		newMsg.setFuncFlag(1);

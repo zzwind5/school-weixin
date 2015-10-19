@@ -1,12 +1,15 @@
 package com.wxapi.message;
 
+import net.sf.json.JSON;
+import net.sf.json.xml.XMLSerializer;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.core.util.JsonUtil;
-
-import net.sf.json.JSON;
-import net.sf.json.xml.XMLSerializer;
+import com.wxapi.message.response.WxMessageResponseNews;
+import com.wxapi.message.response.WxMessageNewsItem;
+import com.wxapi.message.response.WxMessageResponseImage;
 
 public class WxMessageTest {
 	
@@ -65,7 +68,7 @@ public class WxMessageTest {
 	
 	@Test
 	public void messageNewsTest(){
-		WxMessageNews newMsg = new WxMessageNews();
+		WxMessageResponseNews newMsg = new WxMessageResponseNews();
 		newMsg.setFromUserName("yang");
 		newMsg.setToUserName("zhang");
 		newMsg.setContent("This is a test");
@@ -83,5 +86,14 @@ public class WxMessageTest {
 		newMsg.getArticles().add(newsItem2);
 		
 		System.out.println(JsonUtil.toXmlString(newMsg));
+	}
+	
+	@Test
+	public void messageResponseTest(){
+		WxMessageResponseImage imageResp = new WxMessageResponseImage();
+		imageResp.setFromUserName("111");
+		imageResp.setToUserName("2222");
+		imageResp.getImage().setMediaId("aaaaa");
+		System.out.println(JsonUtil.toXmlString(imageResp));
 	}
 }

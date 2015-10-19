@@ -1,4 +1,4 @@
-package com.wxapi.message;
+package com.wxapi.message.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
