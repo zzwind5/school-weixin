@@ -62,4 +62,26 @@ public class WxMessageTest {
 		System.out.println(JsonUtil.toXmlString(msgObj, true));
 		System.out.println(JsonUtil.toJsonString(msgObj));
 	}
+	
+	@Test
+	public void messageNewsTest(){
+		WxMessageNews newMsg = new WxMessageNews();
+		newMsg.setFromUserName("yang");
+		newMsg.setToUserName("zhang");
+		newMsg.setContent("This is a test");
+		newMsg.setArticleCount(2);
+	
+		WxMessageNewsItem newsItem1 = new WxMessageNewsItem();
+		newsItem1.setDescription("Item_1");
+		newsItem1.setTitle("语文");
+		
+		WxMessageNewsItem newsItem2 = new WxMessageNewsItem();
+		newsItem2.setDescription("Item_2");
+		newsItem2.setTitle("数学");
+		
+		newMsg.getArticles().add(newsItem1);
+		newMsg.getArticles().add(newsItem2);
+		
+		System.out.println(JsonUtil.toXmlString(newMsg));
+	}
 }

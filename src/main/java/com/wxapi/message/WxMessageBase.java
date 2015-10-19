@@ -1,5 +1,8 @@
 package com.wxapi.message;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -7,9 +10,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "MsgType")
 @JsonSubTypes({
@@ -21,6 +21,7 @@ import lombok.EqualsAndHashCode;
 	, @Type(name = WxMsgType.LOCATION,			value = WxMessageLocation.class)
 	, @Type(name = WxMsgType.LINK,				value = WxMessageLink.class)
 	, @Type(name = WxMsgType.EVENT,				value = WxMessageEvent.class)
+	, @Type(name = WxMsgType.NEWS,				value = WxMessageNews.class)
 })
 @Data
 @EqualsAndHashCode

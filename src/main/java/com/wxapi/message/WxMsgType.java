@@ -2,7 +2,7 @@ package com.wxapi.message;
 
 public enum WxMsgType {
 	
-	text, image, voice, video, shortvideo, location, link, event;
+	text, image, voice, video, shortvideo, location, link, event, news;
 	
 	public static final String TEXT 		= "text";
 	public static final String IMAGE 		= "image";
@@ -12,4 +12,5 @@ public enum WxMsgType {
 	public static final String LOCATION 	= "location";
 	public static final String LINK 		= "link";
 	public static final String EVENT 		= "event";
+	public static final String NEWS 		= "news";
 }
