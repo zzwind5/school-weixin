@@ -4,6 +4,7 @@ package com.wxapi.workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.core.util.WxMessageUtil;
 import com.wxapi.message.WxEventOperation;
 import com.wxapi.message.WxEventType;
 import com.wxapi.message.WxMessageBase;
@@ -114,9 +115,9 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 		responseText.setCreateTime(System.currentTimeMillis());
 		
 		if (stepIndex == 0) {
-			responseText.setContent("请输入发布的内容");
+			responseText.setContent(WxMessageUtil.getMessage("wxapi.workflow.release.input"));
 		} else if (stepIndex == 1) {
-			responseText.setContent("发布成功");
+			responseText.setContent(WxMessageUtil.getMessage("wxapi.workflow.release.success"));
 		}
 		
 		return responseText;

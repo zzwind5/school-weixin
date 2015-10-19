@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.wxapi.model.WxOwner;
-import com.wxapi.repositories.WxOwnerRepository;
 import com.wxapi.vo.WxAccessTokenVo;
 import com.wxapi.vo.WxApiResultVo;
 
@@ -15,9 +14,6 @@ public class WxApiHelper {
 	//token 接口
 	private static final String TOKEN = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
 	private static final String MENU_CREATE = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s";
-	
-	@Autowired
-	private WxOwnerRepository wxOwnerRep;
 	
 	@Autowired
 	private RestTemplate restTemplate;
