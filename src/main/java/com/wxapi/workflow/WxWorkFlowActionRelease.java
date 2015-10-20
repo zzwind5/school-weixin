@@ -37,14 +37,20 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 
 	@Override
 	public boolean isNextStepMatch(int nextStepIdx, WxMessageBase message) {
-		if (nextStepIdx == 0 && message instanceof WxMessageEvent) {
-			WxMessageEvent msgEvent = (WxMessageEvent)message;
-			return msgEvent.getEvent() == WxEventType.CLICK && 
-					(msgEvent.getEventKey() == WxEventOperation.RELEASE_CHINESE
-						|| msgEvent.getEventKey() == WxEventOperation.RELEASE_MATH
-						|| msgEvent.getEventKey() == WxEventOperation.RELEASE_ENGLISH
-						|| msgEvent.getEventKey() == WxEventOperation.RELEASE_MESSAGE
-					);
+		if (nextStepIdx == 0) {
+			WxEventOperation releaseOpt = this.getOperationEnum(message);
+			if (releaseOpt == null) {
+				return false;
+			}
+			switch(releaseOpt) {
+				case RELEASE_CHINESE:
+				case RELEASE_MATH:
+				case RELEASE_ENGLISH:
+				case RELEASE_MESSAGE:
+					return true;
+				default:
+					return false;
+			}
 		} else if (nextStepIdx == 1) {
 			switch (message.getMsgType()) {
 				case image:
@@ -64,7 +70,7 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 	public void closeCachedWorkFlow(WxWorkflowCtx workFlowCtx) {
 		WxSchoolMessage wxMessageEntity = null;
 		
-		WxMessageEvent messageFirst = (WxMessageEvent)workFlowCtx.getWxMessage(0);
+		WxMessageBase messageFirst = workFlowCtx.getWxMessage(0);
 		WxMessageBase messageSecond = workFlowCtx.getWxMessage(1);
 		
 		if (messageSecond instanceof WxMessageText) {
@@ -96,7 +102,7 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 		wxMessageEntity.setFromUserName(messageFirst.getFromUserName());
 		wxMessageEntity.setToUserName(messageFirst.getToUserName());
 		wxMessageEntity.setOwnerId(messageFirst.getOwnerId());
-		wxMessageEntity.setWxMenuKey(messageFirst.getEventKey());
+		wxMessageEntity.setWxMenuKey(this.getOperationEnum(messageFirst));
 		
 		wxSchoolMessageRepository.saveAndFlush(wxMessageEntity);
 		workFlowCtxCache.clearWxWorkflowCtx(workFlowCtx);

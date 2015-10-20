@@ -5,9 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.wxapi.cache.WxHomeWorkCache;
 import com.wxapi.message.WxEventOperation;
-import com.wxapi.message.WxEventType;
 import com.wxapi.message.WxMessageBase;
-import com.wxapi.message.WxMessageEvent;
 
 @Component
 public class WxWorkFlowActionQuery extends WxWorkFlowActionAbstract {
@@ -17,27 +15,26 @@ public class WxWorkFlowActionQuery extends WxWorkFlowActionAbstract {
 
 	@Override
 	public boolean isActionMatch(WxMessageBase message) {
-		if ( !(message instanceof WxMessageEvent) ) {
+		WxEventOperation queryOpt = this.getOperationEnum(message);
+		if (queryOpt == null) {
 			return false;
 		}
-		
-		WxMessageEvent msgEvent = (WxMessageEvent)message;
-		return msgEvent.getEvent() == WxEventType.CLICK && 
-				(msgEvent.getEventKey() == WxEventOperation.QUERY_CHINESE
-					|| msgEvent.getEventKey() == WxEventOperation.QUERY_MATH
-					|| msgEvent.getEventKey() == WxEventOperation.QUERY_ENGLISH
-					|| msgEvent.getEventKey() == WxEventOperation.QUERY_MESSAGE
-					|| msgEvent.getEventKey() == WxEventOperation.QUERY_ALL
-				);
+		switch(queryOpt) {
+			case QUERY_CHINESE:
+			case QUERY_MATH:
+			case QUERY_ENGLISH:
+			case QUERY_MESSAGE:
+			case QUERY_ALL:
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	@Override
 	public WxMessageBase process(WxMessageBase message) {
-		if (message instanceof WxMessageEvent) {
-			return homeWorkCache.queryHomeWork((WxMessageEvent)message);
-		}
-		
-		return null;
+		WxEventOperation queryOpt = this.getOperationEnum(message);
+		return homeWorkCache.queryHomeWork(queryOpt, message);
 	}
 
 }

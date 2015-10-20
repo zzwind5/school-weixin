@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.core.util.WxMessageUtil;
 import com.wxapi.message.WxEventOperation;
-import com.wxapi.message.WxEventType;
 import com.wxapi.message.WxMessageBase;
-import com.wxapi.message.WxMessageEvent;
 import com.wxapi.message.response.WxMessageNewsItem;
 import com.wxapi.message.response.WxMessageResponseImage;
 import com.wxapi.message.response.WxMessageResponseNews;
@@ -61,25 +59,21 @@ public class WxHomeWorkCache {
 		homeWorkCache.put(key, schoolMsg);
 	}
 	
-	public WxMessageBase queryHomeWork(WxMessageEvent eventMsg) {
-		if (eventMsg.getEvent() != WxEventType.CLICK) {
-			return null;
-		}
-		
-		switch(eventMsg.getEventKey()) {
-		case QUERY_CHINESE:
-		case QUERY_ENGLISH:
-		case QUERY_MATH:
-		case QUERY_MESSAGE:
-			return queryHomeWork(eventMsg.getEventKey());
-		case QUERY_ALL:
-			return queryAllHomeWork(eventMsg);
-		default:
-			return null;
+	public WxMessageBase queryHomeWork(WxEventOperation queryOpt, WxMessageBase queryMsg) {
+		switch(queryOpt) {
+			case QUERY_CHINESE:
+			case QUERY_ENGLISH:
+			case QUERY_MATH:
+			case QUERY_MESSAGE:
+				return queryReleasedMsg(queryOpt, queryMsg);
+			case QUERY_ALL:
+				return queryAllHomeWork(queryMsg);
+			default:
+				return null;
 		}
 	}
 	
-	private WxMessageBase queryHomeWork(WxEventOperation eventOpt){
+	private WxMessageBase queryReleasedMsg(WxEventOperation eventOpt, WxMessageBase queryMsg){
 		String key = generateKey(eventOpt);
 		WxSchoolMessage schoolMsg = homeWorkCache.get(key);
 		if (schoolMsg == null) {
@@ -120,18 +114,18 @@ public class WxHomeWorkCache {
 		}
 		
 		if (resWxMessage != null) {
-			resWxMessage.setFromUserName(schoolMsg.getToUserName());
-			resWxMessage.setToUserName(schoolMsg.getFromUserName());
+			resWxMessage.setFromUserName(queryMsg.getToUserName());
+			resWxMessage.setToUserName(queryMsg.getFromUserName());
 			resWxMessage.setCreateTime(System.currentTimeMillis());
 		}
 		
 		return resWxMessage;
 	}
 	
-	private WxMessageBase queryAllHomeWork(WxMessageEvent eventMsg) {
+	private WxMessageBase queryAllHomeWork(WxMessageBase queryMsg) {
 		WxMessageResponseNews msgNews = new WxMessageResponseNews();
-		msgNews.setFromUserName(eventMsg.getToUserName());
-		msgNews.setToUserName(eventMsg.getFromUserName());
+		msgNews.setFromUserName(queryMsg.getToUserName());
+		msgNews.setToUserName(queryMsg.getFromUserName());
 		msgNews.setCreateTime(System.currentTimeMillis());
 		msgNews.setArticleCount(1);
 		
@@ -143,7 +137,7 @@ public class WxHomeWorkCache {
 		WxEventOperation[] operations = {WxEventOperation.QUERY_CHINESE, 
 				WxEventOperation.QUERY_MATH, WxEventOperation.QUERY_ENGLISH, WxEventOperation.QUERY_MESSAGE};
 		for (WxEventOperation opt : operations) {
-			homeWorkList.add(queryHomeWork(opt));
+			homeWorkList.add(queryHomeWork(opt, queryMsg));
 		}
 		
 		StringBuilder contentSB = new StringBuilder();
@@ -162,11 +156,11 @@ public class WxHomeWorkCache {
 			if (msgHomeWork instanceof WxMessageResponseNews) {
 				itemContent = ((WxMessageResponseNews)msgHomeWork).getArticles().get(0).getDescription();
 			} else if (msgHomeWork instanceof WxMessageResponseImage) {
-				itemContent = WxMessageUtil.getMessage("wxapi.homwwork.type.all.image", type);
+				itemContent = WxMessageUtil.getMessage("wxapi.homwwork.type.all.image", type, operations[index].getKey());
 			} else if (msgHomeWork instanceof WxMessageResponseVoice) {
-				itemContent = WxMessageUtil.getMessage("wxapi.homwwork.type.all.voice", type);
+				itemContent = WxMessageUtil.getMessage("wxapi.homwwork.type.all.voice", type, operations[index].getKey());
 			} else if (msgHomeWork instanceof WxMessageResponseVideo) {
-				itemContent = WxMessageUtil.getMessage("wxapi.homwwork.type.all.video", type);
+				itemContent = WxMessageUtil.getMessage("wxapi.homwwork.type.all.video", type, operations[index].getKey());
 			}
 			
 			contentSB.append(itemContent);

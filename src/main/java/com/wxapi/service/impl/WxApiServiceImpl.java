@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.core.util.JsonUtil;
+import com.core.util.WxMessageUtil;
 import com.wxapi.cache.WxOwnerCache;
 import com.wxapi.cache.WxWorkflowCtxCache;
 import com.wxapi.message.WxMessageBase;
-import com.wxapi.message.response.WxMessageResponseNews;
-import com.wxapi.message.response.WxMessageNewsItem;
+import com.wxapi.message.WxMessageText;
 import com.wxapi.model.WxOwner;
 import com.wxapi.process.WxApiHelper;
 import com.wxapi.service.WxApiService;
@@ -78,8 +78,7 @@ public class WxApiServiceImpl implements WxApiService {
 		}
 		
 		//return a welcome message.
-//		responseMsg = createDefaultMessage(messageBase);
-		responseMsg = createDefaultMessageNews(messageBase);
+		responseMsg = createWelcomMessage(messageBase, wxOwner);
 		
 		return responseMsg;
 	}
@@ -117,41 +116,50 @@ public class WxApiServiceImpl implements WxApiService {
 		}
 	}
 	
-	private WxMessageBase createDefaultMessageNews(WxMessageBase messageBase) {
-		WxMessageResponseNews newMsg = new WxMessageResponseNews();
-		newMsg.setFromUserName(messageBase.getToUserName());
-		newMsg.setToUserName(messageBase.getFromUserName());
-		newMsg.setCreateTime(System.currentTimeMillis());
-		newMsg.setArticleCount(1);
-		newMsg.setFuncFlag(1);
-	
-		WxMessageNewsItem newsItem1 = new WxMessageNewsItem();
-		StringBuffer des = new StringBuffer();
-		des.append("语文：拼音快乐读10次");
-		des.append("\n");
-		des.append("\n");
-		des.append("_________________________");
-		des.append("\n");
-		des.append("\n");
-		des.append("\n");
-		des.append("数学：10以内加减法");
-		
-		newsItem1.setDescription(des.toString());
-		newsItem1.setTitle("家庭作业");
-		newsItem1.setPicUrl("");
-//		newsItem1.setPicUrl("http://v1.qzone.cc/avatar/201405/01/01/40/53613582688bd260.jpg%21200x200.jpg");
-//		newsItem1.setUrl("111");
-		
-//		WxMessageNewsItem newsItem2 = new WxMessageNewsItem();
-//		newsItem2.setDescription("10以内加减法");
-//		newsItem2.setTitle("数学");
-//		newsItem2.setPicUrl("http://v1.qzone.cc/avatar/201405/01/01/40/53613582688bd260.jpg%21200x200.jpg");
-//		newsItem2.setUrl("111");
-		
-		newMsg.getArticles().add(newsItem1);
-//		newMsg.getArticles().add(newsItem2);
-		
-		return newMsg;
+	private WxMessageBase createWelcomMessage(WxMessageBase messageBase, WxOwner wxOwner) {
+		WxMessageText textMsg = new WxMessageText();
+		textMsg.setFromUserName(messageBase.getToUserName());
+		textMsg.setToUserName(messageBase.getFromUserName());
+		textMsg.setCreateTime(System.currentTimeMillis());
+		textMsg.setContent(WxMessageUtil.getMessage("wxapi.service.welcome", wxOwner.getDescription()));
+		return textMsg;
 	}
+	
+//	private WxMessageBase createDefaultMessageNews(WxMessageBase messageBase) {
+//		WxMessageResponseNews newMsg = new WxMessageResponseNews();
+//		newMsg.setFromUserName(messageBase.getToUserName());
+//		newMsg.setToUserName(messageBase.getFromUserName());
+//		newMsg.setCreateTime(System.currentTimeMillis());
+//		newMsg.setArticleCount(1);
+//		newMsg.setFuncFlag(1);
+//	
+//		WxMessageNewsItem newsItem1 = new WxMessageNewsItem();
+//		StringBuffer des = new StringBuffer();
+//		des.append("语文：拼音快乐读10次");
+//		des.append("\n");
+//		des.append("\n");
+//		des.append("_________________________");
+//		des.append("\n");
+//		des.append("\n");
+//		des.append("\n");
+//		des.append("数学：10以内加减法");
+//		
+//		newsItem1.setDescription(des.toString());
+//		newsItem1.setTitle("家庭作业");
+//		newsItem1.setPicUrl("");
+////		newsItem1.setPicUrl("http://v1.qzone.cc/avatar/201405/01/01/40/53613582688bd260.jpg%21200x200.jpg");
+////		newsItem1.setUrl("111");
+//		
+////		WxMessageNewsItem newsItem2 = new WxMessageNewsItem();
+////		newsItem2.setDescription("10以内加减法");
+////		newsItem2.setTitle("数学");
+////		newsItem2.setPicUrl("http://v1.qzone.cc/avatar/201405/01/01/40/53613582688bd260.jpg%21200x200.jpg");
+////		newsItem2.setUrl("111");
+//		
+//		newMsg.getArticles().add(newsItem1);
+////		newMsg.getArticles().add(newsItem2);
+//		
+//		return newMsg;
+//	}
 
 }

@@ -1,31 +1,35 @@
 package com.wxapi.message;
 
+import lombok.Getter;
+
 public enum WxEventOperation {
 	//Query operation
-	QUERY_CHINESE,
-	QUERY_MATH,
-	QUERY_ENGLISH,
-	QUERY_MESSAGE,
-	QUERY_ALL,
+	QUERY_ALL("10"),
+	QUERY_CHINESE("11"),
+	QUERY_MATH("12"),
+	QUERY_ENGLISH("13"),
+	QUERY_MESSAGE("14"),
+	
 	
 	//Release operation
-	RELEASE_CHINESE,
-	RELEASE_MATH,
-	RELEASE_ENGLISH,
-	RELEASE_MESSAGE
-	;
+	RELEASE_CHINESE("21"),
+	RELEASE_MATH("22"),
+	RELEASE_ENGLISH("23"),
+	RELEASE_MESSAGE("24");
 	
-	public boolean needStartWorkFlow(){
-		switch(this) {
-		case RELEASE_CHINESE:
-		case RELEASE_MATH:
-		case RELEASE_ENGLISH:
-		case RELEASE_MESSAGE:
-			return true;
-		default:
-			return false;
-		}
+	@Getter
+	private final String key;
+	
+	private WxEventOperation(String key) {
+		this.key = key;
 	}
 	
-	
+	public static WxEventOperation getEnumByKey(String key) {
+		for (WxEventOperation optEnum : WxEventOperation.values()) {
+			if (optEnum.getKey().equals(key)) {
+				return optEnum;
+			}
+		}
+		return null;
+	}
 }
