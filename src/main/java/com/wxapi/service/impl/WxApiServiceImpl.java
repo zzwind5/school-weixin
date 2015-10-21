@@ -11,6 +11,7 @@ import com.wxapi.cache.WxOwnerCache;
 import com.wxapi.cache.WxWorkflowCtxCache;
 import com.wxapi.message.WxMessageBase;
 import com.wxapi.message.WxMessageText;
+import com.wxapi.message.response.WxMessageResponseNews;
 import com.wxapi.model.WxOwner;
 import com.wxapi.process.WxApiHelper;
 import com.wxapi.service.WxApiService;
@@ -74,6 +75,7 @@ public class WxApiServiceImpl implements WxApiService {
 		//For that no need cache or start a cached work flow.
 		responseMsg = firstTimeWorkFlowHandle(messageBase);
 		if (responseMsg != null) {
+			((WxMessageResponseNews)responseMsg).getArticles().get(0).setUrl("http://jzhang.wicp.net/school-weixin/wxweb/msg/newsread.html");
 			return responseMsg;
 		}
 		
