@@ -13,7 +13,7 @@
 							http://www.springframework.org/schema/data/jpa
 							http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">

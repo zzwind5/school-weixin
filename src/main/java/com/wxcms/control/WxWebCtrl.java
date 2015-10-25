@@ -28,7 +28,8 @@ public class WxWebCtrl {
 		news.setShowpic(1);
 		news.setTitle("中国计量学院");
 		news.setDescription("改名前的照片");
-		news.setPicpath("http://img.pic123456.com/tp/2015/08/doihnwu3rfr.jpg");
+//		news.setPicpath("http://img.pic123456.com/tp/2015/08/doihnwu3rfr.jpg");
+		news.setPicpath("http://7xnsiu.com1.z0.glb.clouddn.com/DSC_0083.JPG");
 		
 		ModelAndView mv = new ModelAndView("wxweb/mobileNewsRead");
 		mv.addObject("news",news);
