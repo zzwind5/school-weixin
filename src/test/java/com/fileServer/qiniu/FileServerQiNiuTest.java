@@ -30,8 +30,16 @@ public class FileServerQiNiuTest {
 	
 	@Test
 	public void fetchFileTest() {
-		String url = "http://mmbiz.qpic.cn/mmbiz/u8OujVdroaNsEzX7nNbicz8xoEGzxicUicGzExWYrv4m7JO9eVh0ArupGHKqBOqCamH4HmPcBmibHtpkxIfLOzYQyw/0";
-		String newUrl = qiNiu.fetch(url);
+//		String url = "http://mmbiz.qpic.cn/mmbiz/u8OujVdroaNsEzX7nNbicz8xoEGzxicUicGzExWYrv4m7JO9eVh0ArupGHKqBOqCamH4HmPcBmibHtpkxIfLOzYQyw/0";
+		String urlVocie = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=zvs16vFB1_kLMAi8aW1txRzvbAgTKR4hnmbHob56NYUs-SGRnbF1LeUL2DQ0B9eCG7ZKhuWPTpw1iAah2rrj4V0pjYh-ErXyJWU83MyJxRA&media_id=us3sR1oFDtt4rvT4GKmz9avNWpeH7MQ0hBRj8G53EAyjQoCe4tdXqeJLZVOdLewh";
+		String newUrl = qiNiu.fetch(urlVocie);
 		System.out.println(newUrl);
+	}
+	
+	@Test
+	public void amr2map3() {
+		String key = "FlsS969tmG5xGhwvHbLSfOn14-TY";
+		String id = qiNiu.amr2map3(key);
+		System.out.println(id);
 	}
 }
