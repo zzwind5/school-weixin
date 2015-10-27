@@ -1,0 +1,46 @@
+package com.core.util;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.core.task.Task;
+import com.core.task.TaskResult;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+public class TaskRunUtilTest {
+	
+	private Task task;
+//	
+//	@Before
+//	public void dataPrepare(){
+//		Task task = new Task();
+//		task.setTaskName("Unite Test");
+//		task.setRunnerCode("TempRunnerForTest");
+//	}
+//	
+
+	@Test
+	public void executeSynTest(){
+		Task task = new Task();
+		task.setTaskName("Unite Test");
+		task.setRunnerCode("TempRunnerForTest");		
+		
+		for (int i=0; i<15; i++) {
+			TaskRunUtil.execute(task);
+		}
+		
+		TaskResult result = TaskRunUtil.executeSyn(task);
+		if (result != null) {
+			System.out.println(result.getJsonResult());
+		}
+	}
+	
+	
+//	@Test
+//	public void executeTest(){
+//		TaskRunUtil.execute(task);
+//	}
+}

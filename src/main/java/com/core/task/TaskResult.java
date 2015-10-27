@@ -18,7 +18,7 @@ public class TaskResult implements Serializable, Cloneable {
 	private String resutlMessage;
 	
 	public static TaskResult forTask(final Task task) {
-		return forTask(task);
+		return forTask(task.getTaskId());
 	}
 	
 	public static TaskResult forTask(final String taskId) {

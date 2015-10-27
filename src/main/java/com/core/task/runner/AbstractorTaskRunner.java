@@ -24,7 +24,15 @@ public abstract class AbstractorTaskRunner implements TaskRunner {
 		logger.info("Run task {}...", task);
 		Stopwatch sw = Stopwatch.createStarted();
 		TaskResult taskRes = TaskResult.forTask(task);
-		doRun(task, taskRes);
+		try {
+			doRun(task, taskRes);
+			taskRes.setSuccessful(true);
+		}catch (Exception e){
+			taskRes.setSuccessful(false);
+			taskRes.setResutlMessage(e.getMessage());
+			logger.error(String.format("Task %s run failed.", task), e);
+		}
+		
 		logger.info("Task[{}] run {}. ({})", task.getTaskId(), taskRes.isSuccessful() ? "SUCCESS" : "FAILED", sw);
 		return taskRes;
 	}
