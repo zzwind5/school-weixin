@@ -8,14 +8,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import lombok.Getter;
-
 import com.core.task.Task;
 import com.core.task.TaskResult;
 
+import lombok.Getter;
+
 public class TaskRunnerExecutorContext {
 	
-	private static final long DEF_KEEP_ALIVE_TIMIE = 60L;
+	private static final long DEF_KEEP_ALIVE_TIMIE = 1;
 
 	@Getter
 	private TaskRunner taskRunner;
@@ -25,8 +25,11 @@ public class TaskRunnerExecutorContext {
 	public TaskRunnerExecutorContext(TaskRunner taskRunner) {
 		this.taskRunner = taskRunner;
 		executor = new ThreadPoolExecutor(taskRunner.getCorePoolSize(), taskRunner.getMaxPoolSize(), 
-				DEF_KEEP_ALIVE_TIMIE, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10));
+				DEF_KEEP_ALIVE_TIMIE, TimeUnit.SECONDS, 
+				new LinkedBlockingQueue<Runnable>(taskRunner.getCorePoolSize() * 5),
+				new CachedCallerBlocksPolicy() );
 	}
+	
 	
 	public void execute(final Task task) {
 		Runnable taskHandler = new TaskHandler(taskRunner, task);

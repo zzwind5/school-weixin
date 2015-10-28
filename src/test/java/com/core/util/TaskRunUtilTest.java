@@ -12,7 +12,7 @@ import com.core.task.TaskResult;
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class TaskRunUtilTest {
 	
-	private Task task;
+//	private Task task;
 //	
 //	@Before
 //	public void dataPrepare(){
@@ -23,15 +23,17 @@ public class TaskRunUtilTest {
 //	
 
 	@Test
-	public void executeSynTest(){
-		Task task = new Task();
-		task.setTaskName("Unite Test");
-		task.setRunnerCode("TempRunnerForTest");		
-		
-		for (int i=0; i<15; i++) {
+	public void executeSynTest() throws InterruptedException{
+		for (int i=0; i<100; i++) {
+			Task task = new Task();
+			task.setTaskName("Unite Test " + i);
+			task.setRunnerCode("TempRunnerForTest");
 			TaskRunUtil.execute(task);
 		}
 		
+		Task task = new Task();
+		task.setTaskName("Unite Test syn task ");
+		task.setRunnerCode("TempRunnerForTest");
 		TaskResult result = TaskRunUtil.executeSyn(task);
 		if (result != null) {
 			System.out.println(result.getJsonResult());

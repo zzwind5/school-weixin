@@ -25,7 +25,7 @@ public class TaskRunUtil {
 		TaskRunUtil.taskExecutorReg = taskExecutorReg;
 	}
 	
-	public static void execute(Task task) {
+	public static void execute(Task task) throws InterruptedException {
 		taskExecutorReg.lookUp(task).execute(task);
 	}
 	

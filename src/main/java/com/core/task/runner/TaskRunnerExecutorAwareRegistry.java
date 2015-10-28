@@ -41,11 +41,16 @@ public class TaskRunnerExecutorAwareRegistry implements ApplicationContextAware 
 	}
 
 	public TaskRunnerExecutorContext lookUp(final Task task) {
-		TaskRunnerExecutorContext runnerCtx = runnerMap.get(task.getRunnerCode());
-		if (runnerCtx == null) {
-			throw new IllegalArgumentException("Unrecognized task runner code: " + task.getRunnerCode());
+		try {
+			TaskRunnerExecutorContext runnerCtx = runnerMap.get(task.getRunnerCode());
+			if (runnerCtx == null) {
+				throw new IllegalArgumentException("Unrecognized task runner code: " + task.getRunnerCode());
+			}
+			return runnerMap.get(task.getRunnerCode());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return runnerMap.get(task.getRunnerCode());
+		return null;
 	}
 
 }
