@@ -1,0 +1,16 @@
+[
+
+{
+    "description": "同步微信的access_token",
+    "spec": {
+        "group": "GLOBAL",
+        "name": "Access Token Synchronization",
+        "runnerCode": "##############",
+    },
+    "trigger": {
+        "interval": 1,
+        "intervalUnit": "MINUTES"
+    }
+}
+
+]

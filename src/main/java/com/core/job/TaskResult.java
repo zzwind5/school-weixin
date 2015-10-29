@@ -1,4 +1,4 @@
-package com.core.task;
+package com.core.job;
 
 import java.io.Serializable;
 import java.util.Date;

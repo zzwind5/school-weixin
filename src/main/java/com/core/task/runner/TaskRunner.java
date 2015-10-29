@@ -1,7 +1,7 @@
 package com.core.task.runner;
 
-import com.core.task.Task;
-import com.core.task.TaskResult;
+import com.core.job.Task;
+import com.core.job.TaskResult;
 
 public interface TaskRunner {
 

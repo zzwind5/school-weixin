@@ -3,15 +3,15 @@ package com.core.task.runner;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import com.core.task.Task;
+import com.core.job.Task;
 import com.google.common.base.Stopwatch;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -42,11 +42,11 @@ public class TaskRunnerExecutorAwareRegistry implements ApplicationContextAware 
 
 	public TaskRunnerExecutorContext lookUp(final Task task) {
 		try {
-			TaskRunnerExecutorContext runnerCtx = runnerMap.get(task.getRunnerCode());
+			TaskRunnerExecutorContext runnerCtx = runnerMap.get(task.getJobSpec().getRunnerCode());
 			if (runnerCtx == null) {
-				throw new IllegalArgumentException("Unrecognized task runner code: " + task.getRunnerCode());
+				throw new IllegalArgumentException("Unrecognized task runner code: " + task.getJobSpec().getRunnerCode());
 			}
-			return runnerMap.get(task.getRunnerCode());
+			return runnerMap.get(task.getJobSpec().getRunnerCode());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

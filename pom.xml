@@ -23,6 +23,7 @@
 		<spring.security.oauth2.version>2.0.3.RELEASE</spring.security.oauth2.version>
 		<httpcomponents.httpclient.version>4.3.5</httpcomponents.httpclient.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<quartz.version>2.2.1</quartz.version>
 	</properties>
 
 	<dependencies>
@@ -229,6 +230,18 @@
 				<exclusion>
 					<artifactId>guava</artifactId>
 					<groupId>com.google.guava</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>c3p0</groupId>
+					<artifactId>c3p0</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

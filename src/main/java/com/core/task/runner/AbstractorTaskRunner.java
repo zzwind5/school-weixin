@@ -3,8 +3,8 @@ package com.core.task.runner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.core.task.Task;
-import com.core.task.TaskResult;
+import com.core.job.Task;
+import com.core.job.TaskResult;
 import com.google.common.base.Stopwatch;
 
 public abstract class AbstractorTaskRunner implements TaskRunner {

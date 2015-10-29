@@ -8,8 +8,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.core.task.Task;
-import com.core.task.TaskResult;
+import com.core.job.Task;
+import com.core.job.TaskResult;
 
 import lombok.Getter;
 

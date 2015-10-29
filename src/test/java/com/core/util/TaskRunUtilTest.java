@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.core.task.Task;
-import com.core.task.TaskResult;
+import com.core.job.Task;
+import com.core.job.TaskResult;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
@@ -27,13 +27,13 @@ public class TaskRunUtilTest {
 		for (int i=0; i<100; i++) {
 			Task task = new Task();
 			task.setTaskName("Unite Test " + i);
-			task.setRunnerCode("TempRunnerForTest");
+			task.getJobSpec().setRunnerCode("TempRunnerForTest");
 			TaskRunUtil.execute(task);
 		}
 		
 		Task task = new Task();
 		task.setTaskName("Unite Test syn task ");
-		task.setRunnerCode("TempRunnerForTest");
+		task.getJobSpec().setRunnerCode("TempRunnerForTest");
 		TaskResult result = TaskRunUtil.executeSyn(task);
 		if (result != null) {
 			System.out.println(result.getJsonResult());

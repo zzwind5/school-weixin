@@ -2,8 +2,8 @@ package com.core.task.runner.impl;
 
 import org.springframework.stereotype.Component;
 
-import com.core.task.Task;
-import com.core.task.TaskResult;
+import com.core.job.Task;
+import com.core.job.TaskResult;
 import com.core.task.runner.AbstractorTaskRunner;
 
 @Component
