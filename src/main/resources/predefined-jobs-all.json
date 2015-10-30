@@ -5,7 +5,7 @@
     "spec": {
         "group": "GLOBAL",
         "name": "Access Token Synchronization",
-        "runnerCode": "##############",
+        "runnerCode": "TempRunnerForTest"
     },
     "trigger": {
         "interval": 1,

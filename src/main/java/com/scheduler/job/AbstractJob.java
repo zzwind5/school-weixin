@@ -19,6 +19,7 @@ public abstract class AbstractJob implements Job {
         } catch (JobExecutionException je) {
             throw je;
         } catch (Exception e) {
+        	e.printStackTrace();
             log.error("Unexpected exception occurs during job execution.", e);
         }
     }

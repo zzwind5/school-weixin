@@ -11,7 +11,7 @@ public class TempRunnerForTest extends AbstractorTaskRunner {
 
 	@Override
 	protected void doRun(Task task, TaskResult taskResult) {
-		System.out.println(String.format("Task (%s) start [%s] .....", task.getTaskName(), Thread.currentThread().getName()));
+		System.out.println(String.format("Task (%s) start [%s] .....", task.getJobSpec().getName(), Thread.currentThread().getName()));
 		try {
 			Thread.sleep(1000 * 10);
 			taskResult.setJsonResult("Hello World!");
@@ -19,7 +19,7 @@ public class TempRunnerForTest extends AbstractorTaskRunner {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(String.format("************Task (%s) execute successful.", task.getTaskName()));
+		System.out.println(String.format("************Task (%s) execute successful.", task.getJobSpec().getName()));
 	}
 
 }

@@ -3,14 +3,14 @@ package com.core.util;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.core.job.Task;
 import com.core.job.TaskResult;
 import com.core.task.runner.TaskRunnerExecutorAwareRegistry;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -25,7 +25,7 @@ public class TaskRunUtil {
 		TaskRunUtil.taskExecutorReg = taskExecutorReg;
 	}
 	
-	public static void execute(Task task) throws InterruptedException {
+	public static void execute(Task task) {
 		taskExecutorReg.lookUp(task).execute(task);
 	}
 	

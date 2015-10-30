@@ -1,5 +1,7 @@
 package com.core.job;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +39,7 @@ public class JobTrigger {
     }
 
     public JobTrigger startAfter(final int delay, final TimeUnit unit) {
-//        checkArgument(delay > 0, "Invalid delay[" + delay + "]: MUST be positive.");
+        checkArgument(delay > 0, "Invalid delay[" + delay + "]: MUST be positive.");
         this.delay = delay;
         delayUnit = unit;
         startTime = null;
