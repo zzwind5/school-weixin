@@ -38,7 +38,7 @@ public class FileServerQiNiuTest {
 	
 	@Test
 	public void amr2map3() {
-		String key = "FlsS969tmG5xGhwvHbLSfOn14-TY";
+		String key = "Fv3vRr1cUuzlKGDbozP3_Isx35js";
 		String id = qiNiu.amr2map3(key);
 		System.out.println(id);
 	}

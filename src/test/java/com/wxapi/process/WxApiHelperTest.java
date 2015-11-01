@@ -1,6 +1,9 @@
 package com.wxapi.process;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
+
+import net.sf.json.JSONObject;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,5 +40,12 @@ public class WxApiHelperTest {
 	@Test
 	public void publishMenus() throws UnsupportedEncodingException{
 		System.out.println(wxApiHelper.publishMenus(owner));
+	}
+	
+	@Test
+	public void getQiniuFileDetail() {
+		String fileId = "z0.5633c0b67823de5a4921e771";
+		JSONObject jsonObj = wxApiHelper.getQiniuFileDetail(fileId);
+		System.out.println(jsonObj.getJSONArray("items").getJSONObject(0).get("key"));
 	}
 }

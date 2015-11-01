@@ -3,6 +3,7 @@ package com.wxapi.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,4 +35,7 @@ public class WxOwner extends BaseWxDo<Long> {
 	
 	@Column(name="menu", length=DEFAULT_LARGE_STRING_LENGTH)
 	private String menu;
+	
+	@Transient
+	private String wxAccessToken;
 }

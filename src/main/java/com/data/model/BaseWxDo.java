@@ -10,10 +10,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.core.job.JobParams;
+
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = false, of = {})
 public abstract class BaseWxDo<PK extends Serializable> extends WxTimeStamp 
-	implements WxDo, Cloneable, Serializable {
+	implements WxDo, Cloneable, JobParams, Serializable {
 
 	private static final long serialVersionUID = -9892832637945768L;
 

@@ -4,6 +4,9 @@ package com.wxapi.workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.core.job.Task;
+import com.core.task.runner.impl.WxMaterialStoreRunner;
+import com.core.util.TaskRunUtil;
 import com.core.util.WxMessageUtil;
 import com.wxapi.cache.WxHomeWorkCache;
 import com.wxapi.message.WxEventOperation;
@@ -102,9 +105,14 @@ public class WxWorkFlowActionRelease extends WxWorkFlowActionCachedAbstract {
 		wxMessageEntity.setOwnerId(messageFirst.getOwnerId());
 		wxMessageEntity.setWxMenuKey(this.getOperationEnum(messageFirst));
 		
-		wxSchoolMessageRepository.saveAndFlush(wxMessageEntity);
+		wxMessageEntity = wxSchoolMessageRepository.saveAndFlush(wxMessageEntity);
 		workFlowCtxCache.clearWxWorkflowCtx(workFlowCtx);
 		homeWorkCache.cache(wxMessageEntity);
+		
+		Task store3th = new Task();
+		store3th.getJobSpec().setRunnerCode(WxMaterialStoreRunner.class.getSimpleName());
+		store3th.getJobSpec().setTaskParams(wxMessageEntity);
+		TaskRunUtil.execute(store3th);
 	}
 
 	@Override

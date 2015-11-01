@@ -2,6 +2,7 @@ package com.core.task.runner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.core.job.Task;
 import com.core.job.TaskResult;
@@ -20,6 +21,7 @@ public abstract class AbstractorTaskRunner implements TaskRunner {
 	}
 
 	@Override
+	@Transactional
 	public TaskResult run(Task task) {
 		logger.info("Run task {}...", task);
 		Stopwatch sw = Stopwatch.createStarted();
@@ -28,6 +30,7 @@ public abstract class AbstractorTaskRunner implements TaskRunner {
 			doRun(task, taskRes);
 			taskRes.setSuccessful(true);
 		}catch (Exception e){
+			e.printStackTrace();
 			taskRes.setSuccessful(false);
 			taskRes.setResutlMessage(e.getMessage());
 			logger.error(String.format("Task %s run failed.", task), e);

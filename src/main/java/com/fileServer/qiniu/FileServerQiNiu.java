@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 
 import lombok.NoArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,12 +16,16 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.qiniu.util.UrlSafeBase64;
+import com.wxapi.process.WxApiHelper;
 
 @Component
 @NoArgsConstructor
 public class FileServerQiNiu {
 	
 	private static final String FILE_URL_FORMAT = "http://%s/%s";
+	
+	@Autowired
+	private WxApiHelper wxApiHelper;
 	
 	@Value("${com.qiniu.domain}")
 	private String domain;
@@ -78,7 +83,10 @@ public class FileServerQiNiu {
 	
 	public String amr2map3(String key) {
 		String newKey = key + ".mp3";
-		return pfop(key, newKey, "avthumb/mp3/acodec/libmp3lame/stripmeta/1");
+		pfop(key, newKey, "avthumb/mp3/acodec/libmp3lame/stripmeta/1");
+//		JSONObject jsonObj = wxApiHelper.getQiniuFileDetail(id);
+//		String mp3Key = jsonObj.getJSONArray("items").getJSONObject(0).get("key").toString();
+		return getUrl(newKey);
 	}
 	
 	public String pfop(String key, String newKey, String operations) {

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +22,28 @@ public class WxOwnerCache {
 	@Autowired
 	private WxOwnerRepository wxOwnerRep;
 	
-	private Map<String, WxOwner> cacheMap = new HashMap<>();
+	@Getter
+	private Map<String, WxOwner> nameCacheMap = new HashMap<>();
+	
+	@Getter
+	private Map<Long, WxOwner> idCacheMap = new HashMap<>();
 	
 	@PostConstruct
 	public void init(){
-		cacheMap.clear();
+		nameCacheMap.clear();
+		idCacheMap.clear();
 		List<WxOwner> allOwners = wxOwnerRep.findAll();
 		for (WxOwner owner : allOwners) {
-			cacheMap.put(owner.getOwnerName(), owner);
+			nameCacheMap.put(owner.getOwnerName(), owner);
+			idCacheMap.put(owner.getId(), owner);
 		}
 	}
 	
 	public WxOwner getWxOwner(String ownerName) {
-		return cacheMap.get(ownerName);
+		return nameCacheMap.get(ownerName);
+	}
+	
+	public WxOwner getWxOwner(Long ownerId) {
+		return idCacheMap.get(ownerId);
 	}
 }

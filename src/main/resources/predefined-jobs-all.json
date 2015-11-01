@@ -5,10 +5,10 @@
     "spec": {
         "group": "GLOBAL",
         "name": "Access Token Synchronization",
-        "runnerCode": "TempRunnerForTest"
+        "runnerCode": "WxAccessTokenRefreshRunner"
     },
     "trigger": {
-        "interval": 1,
+        "interval": 100,
         "intervalUnit": "MINUTES"
     }
 }

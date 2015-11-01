@@ -45,4 +45,7 @@ public abstract class WxSchoolMessage extends BaseWxDoInVhm {
 	@Enumerated(EnumType.STRING)
 	@Column(name="wx_menu_key", length=DEFAULT_STRING_LENGTH)
 	private WxEventOperation wxMenuKey;
+	
+	@Column(name="external_url", length=DEFAULT_URL_LENGTH)
+	private String externalUrl;
 }
